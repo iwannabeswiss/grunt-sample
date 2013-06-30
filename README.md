@@ -1,1 +1,1 @@
-# grunjs-example
+# grunjs-sample

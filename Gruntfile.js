@@ -39,7 +39,7 @@ module.exports = function(grunt) {
     },
     jshint: {
       // define the files to lint
-      files: ['gruntfile.js', 'src/js/**/*.js', '!site/assets/js/**/*.min.js'],
+      files: ['Gruntfile.js', 'src/js/**/*.js', '!site/assets/js/**/*.min.js'],
       // configure JSHint (documented at http://www.jshint.com/docs/)
       options: {
           // more options here if you want to override JSHint defaults
@@ -64,8 +64,8 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['<%= jshint.files %>'],
-      tasks: ['jshint']
+      files: ['<%= jshint.files %>', 'src/less/*.less'],
+      tasks: ['local']
     },
     less: {
       options: {
@@ -100,6 +100,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('hookers', ['clean:hooks', 'shell:hooks']);
   grunt.registerTask('test', ['jshint', 'less']);
+  grunt.registerTask('local', ['jshint', 'concat:coffee', 'coffee', 'concat:js', 'less', 'concat:css', 'clean:tmp']);
   grunt.registerTask('release', ['jshint', 'concat:coffee', 'coffee', 'concat:js', 'uglify', 'less', 'concat:css', 'cssmin', 'clean:tmp']);
-  grunt.registerTask('default', ['release']);
+  grunt.registerTask('default', ['local']);
 };
