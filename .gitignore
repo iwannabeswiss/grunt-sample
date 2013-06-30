@@ -1,0 +1,9 @@
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+node_modules/
+
+# For convenience, ignore build, src files
+build/
+src/js/
+src/less/
