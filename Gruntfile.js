@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     concat: {
       css: {
-        // insert here other non-less stylesheets to concatenate
+        // include here other non-less stylesheets to concatenate
         src: ['tmp/styles.css'],
         dest: 'build/css/<%= pkg.bundleName %>.css'
       },
@@ -72,7 +72,8 @@ module.exports = function(grunt) {
         yuicompress: false
       },
       files: {
-        // modify the wildcard if you use @import in your less files
+        // modify the wildcard if you use @import in your less files 
+        // and/or you care about the order
         src: 'src/less/*.less',
         dest: 'tmp/styles.css'
       }
@@ -99,8 +100,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
 
   grunt.registerTask('hookers', ['clean:hooks', 'shell:hooks']);
-  grunt.registerTask('test', ['jshint', 'less']);
-  grunt.registerTask('local', ['jshint', 'concat:coffee', 'coffee', 'concat:js', 'less', 'concat:css', 'clean:tmp']);
-  grunt.registerTask('release', ['jshint', 'concat:coffee', 'coffee', 'concat:js', 'uglify', 'less', 'concat:css', 'cssmin', 'clean:tmp']);
+  grunt.registerTask('test', ['less', 'jshint']);
+  grunt.registerTask('local', ['less', 'concat:css', 'jshint', 'concat:coffee', 'coffee', 'concat:js', 'clean:tmp']);
+  grunt.registerTask('release', ['less', 'concat:css', 'cssmin', 'jshint', 'concat:coffee', 'coffee', 'concat:js', 'uglify', 'clean:tmp']);
   grunt.registerTask('default', ['local']);
 };
